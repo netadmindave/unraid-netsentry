@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <CommunityApplications>
   <Profile>Homelab tools packaged for Unraid. NetSentry: network inventory, CVE matching and log review summarised by a local Ollama model, recommendations only. Support and bug reports via GitHub issues on each app's project repository.</Profile>
-  <Icon>https://raw.githubusercontent.com/netadmindave/unraid-netsentry/main/icon.svg</Icon>
+  <Icon>https://raw.githubusercontent.com/netadmindave/unraid-netsentry/refs/heads/main/icon.svg</Icon>
   <WebPage>https://github.com/netadmindave/unraid-netsentry</WebPage>
 </CommunityApplications>
