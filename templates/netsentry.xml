@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<Container version="2">
+  <Name>NetSentry</Name>
+  <Repository>ghcr.io/netadmindave/netsentry:latest</Repository>
+  <Registry>https://github.com/netadmindave/netsentry/pkgs/container/netsentry</Registry>
+  <Network>host</Network>
+  <MyIP/>
+  <Shell>bash</Shell>
+  <Privileged>false</Privileged>
+  <Support>https://github.com/netadmindave/netsentry/issues</Support>
+  <Project>https://github.com/netadmindave/netsentry</Project>
+  <Overview>Network inventory, CVE matching and log review, summarised by your local Ollama model. Recommendations only: the AI has read-only tools and never changes anything.</Overview>
+  <Description>NetSentry runs on a schedule: it builds a device and service inventory from your UniFi gateway and nmap, matches service versions to known CVEs, reviews logs from Loki, and asks a local Ollama model to write a prioritised report with evidence and suggested actions. Reports are saved to appdata and can be sent to a webhook (Node-RED, Home Assistant).[br][br]Requires an Ollama instance with a tool-calling model (e.g. qwen3:14b). UniFi and Loki are optional.[br][br]Only scan networks you own or are authorised to test. The nmap vulners script sends detected product/version strings to vulners.com; remove it from nmap_args in config.yaml for offline use.[br][br]On first start a default config.yaml is written to the Config path and the container waits. Edit it, then restart. If other containers use a custom br0 network, enable "Host access to custom networks" in Docker settings.</Description>
+  <Category>Network:Management Security:</Category>
+  <WebUI/>
+  <TemplateURL>https://raw.githubusercontent.com/netadmindave/unraid-sentry/main/templates/netsentry.xml</TemplateURL>
+  <Icon>https://raw.githubusercontent.com/netadmindave/unraid-sentry/main/icon.svg</Icon>
+  <ExtraParams>--cap-add=NET_RAW --cap-add=NET_ADMIN</ExtraParams>
+  <PostArgs/>
+  <CPUset/>
+  <Requires>An Ollama server reachable from this host.</Requires>
+  <Config Name="Config" Target="/config" Default="/mnt/user/appdata/netsentry/config" Mode="rw" Description="config.yaml lives here. A default is written on first start." Type="Path" Display="always" Required="true" Mask="false">/mnt/user/appdata/netsentry/config</Config>
+  <Config Name="Data" Target="/data" Default="/mnt/user/appdata/netsentry/data" Mode="rw" Description="SQLite inventory and Markdown reports." Type="Path" Display="always" Required="true" Mask="false">/mnt/user/appdata/netsentry/data</Config>
+  <Config Name="UniFi password" Target="UNIFI_PASSWORD" Default="" Mode="" Description="Password for the local view-only UniFi account named in config.yaml. Leave empty if not using UniFi." Type="Variable" Display="always" Required="false" Mask="true"></Config>
+  <Config Name="Full scan schedule" Target="SCAN_CRON" Default="0 3 * * *" Mode="" Description="Cron for scan + full review." Type="Variable" Display="always" Required="true" Mask="false">0 3 * * *</Config>
+  <Config Name="Log review schedule" Target="LOGS_CRON" Default="" Mode="" Description="Cron for log-only review, e.g. 15 * * * *. Leave empty unless Loki is configured." Type="Variable" Display="always" Required="false" Mask="false"></Config>
+  <Config Name="Run on start" Target="RUN_ON_START" Default="false" Mode="" Description="true = do one full run whenever the container starts." Type="Variable" Display="advanced" Required="false" Mask="false">false</Config>
+  <Config Name="TZ" Target="TZ" Default="America/New_York" Mode="" Description="Time zone for schedules and report names." Type="Variable" Display="advanced" Required="false" Mask="false">America/New_York</Config>
+</Container>
