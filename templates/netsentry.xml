@@ -13,8 +13,8 @@
   <Description>NetSentry runs on a schedule: it builds a device and service inventory from your UniFi gateway and nmap, matches service versions to known CVEs, reviews logs from Loki, and asks a local Ollama model to write a prioritised report with evidence and suggested actions. Reports are saved to appdata and can be sent to a webhook (Node-RED, Home Assistant).[br][br]Requires an Ollama instance with a tool-calling model (e.g. qwen3:14b). UniFi and Loki are optional.[br][br]Only scan networks you own or are authorised to test. The nmap vulners script sends detected product/version strings to vulners.com; remove it from nmap_args in config.yaml for offline use.[br][br]On first start a default config.yaml is written to the Config path and the container waits. Edit it, then restart. If other containers use a custom br0 network, enable "Host access to custom networks" in Docker settings.</Description>
   <Category>Network:Management Security:</Category>
   <WebUI/>
-  <TemplateURL>https://raw.githubusercontent.com/netadmindave/unraid-sentry/main/templates/netsentry.xml</TemplateURL>
-  <Icon>https://raw.githubusercontent.com/netadmindave/unraid-sentry/main/icon.svg</Icon>
+  <TemplateURL>https://raw.githubusercontent.com/netadmindave/unraid-netsentry/main/templates/netsentry.xml</TemplateURL>
+  <Icon>https://raw.githubusercontent.com/netadmindave/unraid-netsentry/main/icon.svg</Icon>
   <ExtraParams>--cap-add=NET_RAW --cap-add=NET_ADMIN</ExtraParams>
   <PostArgs/>
   <CPUset/>
